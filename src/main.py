@@ -13,25 +13,20 @@ def home():
 def telegram():
     try:
         data = request.get_json()
-        print(json.dumps(data))
-        print("Probando lugar: 1")
+        print("Json recibido: "+json.dumps(data))
         message = data['message']
-        print("Probando lugar: 2")
         query = message['text']
-        print("Probando lugar: 3")
         sender_id = message['from']['id']
-        print("Probando lugar: 4")
+        print("Mensaje recibido: " + query)
 
         words = query.split(' ')
 
         if words[0] == '/ask':
             pass
         else:
-
-            print("Mensaje recibido: " + query)
             response = clasificar_modelo(query)
             print("Mensaje a mandar: " + response)
-        sendMessage(sender_id, response)
+            sendMessage(sender_id, response)
     except:
         pass
     finally:

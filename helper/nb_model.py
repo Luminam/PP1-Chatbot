@@ -1,10 +1,13 @@
-import pickle
 from joblib import dump, load
-import model.joblib
 
-#model = load('model.joblib') 
-vector_bow = load('./bow_transformer.joblib') 
-
+model = load('./helper/model.joblib')   
+CV = load('./helper/bow_transformer.joblib')
 
 def clasificar_modelo(texto):
-    return "skill issue"
+    return predecir(texto)
+
+def predecir(texto):
+    consulta = [texto]
+    title_bow = CV.transform(consulta)
+    resultado = model.predict(title_bow)
+    return resultado[0]
