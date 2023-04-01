@@ -22,18 +22,15 @@ def telegram():
         sender_id = message['from']['id']
         print("Probando lugar: 4")
 
-        #words = query.split(' ')
-        #if words[0] == '/ask':
+        words = query.split(' ')
 
+        if words[0] == '/ask':
+            pass
+        else:
 
-
-
-
-
-
-        print("Mensaje recibido: " + query)
-        response = clasificar_modelo(query)
-        print("Mensaje a mandar: " + response)
+            print("Mensaje recibido: " + query)
+            response = clasificar_modelo(query)
+            print("Mensaje a mandar: " + response)
         sendMessage(sender_id, response)
     except:
         pass
