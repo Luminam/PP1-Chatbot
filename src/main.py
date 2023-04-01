@@ -14,9 +14,13 @@ def telegram():
     try:
         data = request.get_json()
         print(json.dumps(data))
+        print("Probando lugar: 1")
         message = data['message']
+        print("Probando lugar: 2")
         query = message['text']
+        print("Probando lugar: 3")
         sender_id = message['from']['id']
+        print("Probando lugar: 4")
 
         #words = query.split(' ')
         #if words[0] == '/ask':
