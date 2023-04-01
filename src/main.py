@@ -27,7 +27,9 @@ def telegram():
 
 
 
+        print("Mensaje recibido: " + query)
         response = clasificar_modelo(query)
+        print("Mensaje a mandar: " + response)
         sendMessage(sender_id, response)
     except:
         pass
