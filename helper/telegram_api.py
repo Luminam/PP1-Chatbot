@@ -14,4 +14,8 @@ def sendMessage(sender_id:int, message:str) -> None:
     headers = {"Content-Type": "application/json"}
     resp = requests.request("POST", url, json=payload, headers=headers)
     
-    print(resp.text)
+    #print("Json a enviar: "+resp.text)
+
+def enviarMensaje(sender_id, response):
+    print("Mensaje a enviar: " + str(response) + "\nUsuario a  enviar: "+ str(sender_id))
+    sendMessage(sender_id, response)
