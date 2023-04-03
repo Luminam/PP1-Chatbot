@@ -9,13 +9,13 @@ def sendMessage(sender_id:int, message:str) -> None:
     url = f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage"
     payload = {
         "chat_id":sender_id,
-        "text":message
+        "text":message,
+        "parse_mode": "Markdown"
     }
     headers = {"Content-Type": "application/json"}
-    resp = requests.request("POST", url, json=payload, headers=headers)
+    requests.request("POST", url, json=payload, headers=headers)
     
-    #print("Json a enviar: "+resp.text)
 
 def enviarMensaje(sender_id, response):
-    print("Mensaje a enviar: " + str(response) + "\nUsuario a  enviar: "+ str(sender_id))
+    print("***Mensaje a enviar a la id "+ str(sender_id)+ ": \"" + str(response) + "\"") #Para los logs
     sendMessage(sender_id, response)
