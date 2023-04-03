@@ -73,7 +73,7 @@ def procesarMensaje(data):
             enviarMensaje(sender_id, "Se ha desconectado del usuario correctamente.\nVuelve a la lista de espera.")
         else: #lo que escribió no es un comando
             if sender_id in dictConTech:                
-                enviarMensaje(dictConTech.get(sender_id), query)
+                enviarMensaje(dictConTech.get(sender_id), salvarMarkdown(query))
             else:
                 enviarMensaje(sender_id, "No se encuentra conectado con ningún cliente actualmente.\nComandos disponibles:\n    /consultas\n    /estadisticas\n    /salir")
     
@@ -125,7 +125,7 @@ def procesarMensaje(data):
                 enviarMensaje(sender_id,"Para ayudarme a ser un mejor bot, me alegraría si clasificara mi respuesta con /botBueno "+Emoji.FELIZ_CACHETE_ROJO+ " o /botMalo "+Emoji.LAGRIMA+"\nSi escribió la consulta incorrectamente puede reintentarlo volviendo a enviar otro mensaje.")
                 dictUser.update({sender_id: EtapaUser.CALIFICACION})    
             elif etapa == EtapaUser.SOPORTE_TECNICO:
-                enviarMensaje(dictConUser.get(sender_id), query)                
+                enviarMensaje(dictConUser.get(sender_id), salvarMarkdown(query))                
             else:       
                 pass
 
@@ -140,24 +140,25 @@ def terminarSesion(sender_id):
         listaTech.remove(sender_id)
     if sender_id in dictUser:
         dictUser.pop(sender_id)
+        ''' #Comentado para propósitos de la demo
     if sender_id in dictUltMenUser:
         dictUltMenUser.pop(sender_id)
     if sender_id in dictUltClasMod:
         dictUltClasMod.pop(sender_id)
-
+        '''
 def terminarConexion(sender_id):
     if sender_id in dictConTech: #Si el técnico la termina
         usuarioEnConexion = dictConTech.pop(sender_id)
         listaTechLibres.append(sender_id)
         dictConUser.pop(usuarioEnConexion)
         dictUser.pop(usuarioEnConexion)
-        enviarMensaje(usuarioEnConexion, "Ha finalizado su conección con Soporte Técnico.\nEspero que hayamos podido solucionar sus problemas." + Emoji.MUY_FELIZ)
+        enviarMensaje(usuarioEnConexion, "Ha finalizado su conexión con Soporte Técnico.\nEspero que hayamos podido solucionar sus problemas." + Emoji.MUY_FELIZ)
     elif sender_id in dictConUser: #Si el usuario la termina
         tecnicoEnConexion = dictConUser.pop(sender_id)
         dictUser.pop(sender_id)
         listaTechLibres.append(tecnicoEnConexion)
         dictConTech.pop(tecnicoEnConexion)
-        enviarMensaje(tecnicoEnConexion, "El usuario ha finalizado la conección.")
+        enviarMensaje(tecnicoEnConexion, "El usuario ha finalizado la conexión.")
     
 def nuevaConexion(sender_id, data):
     if len(listaTechLibres) >0:                    
@@ -165,9 +166,28 @@ def nuevaConexion(sender_id, data):
         dictConUser.update({sender_id: tech_id}) #establecemos la conexion
         dictConTech.update({tech_id: sender_id}) 
         dictUser.update({sender_id: EtapaUser.SOPORTE_TECNICO})
-        enviarMensaje(sender_id, "Se ha establecido la conección con nuestro personal de Soporte Técnico."+Emoji.FELIZ_CACHETE_ROJO+"\nLe atenderá en brevedad.")
-        enviarMensaje(tech_id, "'''Conección establecida'''.\n*Id_usuario*: "+salvarMarkdown(sender_id)+"\n*Nombre:* "+salvarMarkdown(data['message']['from']['first_name'])+"\n*Apellido:* "+salvarMarkdown(data['message']['from']['last_name'])+"\n*Nombre de usuario:* "+salvarMarkdown(data['message']['from']['username'])) 
-        enviarMensaje(tech_id, "La última consulta realizada por el usuario ha sido:\n"+salvarMarkdown(dictUltMenUser.get(sender_id)))  
+        enviarMensaje(sender_id, "Se ha establecido la conexión con nuestro personal de Soporte Técnico."+Emoji.FELIZ_CACHETE_ROJO+"\nLe atenderá en brevedad.")
+        
+        nombre = "No tiene"
+        apellido = "No tiene"
+        nombreUsuario = "No tiene"
+        try:
+            nombre = data['message']['from']['first_name']
+        except:
+            pass
+        try:
+            apellido = data['message']['from']['last_name']
+        except:
+            pass
+        try:
+            nombreUsuario = data['message']['from']['username']
+        except:
+            pass
+        enviarMensaje(tech_id, "Conexión establecida.\n*Id usuario*: "+salvarMarkdown(sender_id)+"\n*Nombre:* "+salvarMarkdown(nombre)+"\n*Apellido:* "+salvarMarkdown(apellido)+"\n*Nombre de usuario:* "+salvarMarkdown(nombreUsuario)) 
+        if dictUltMenUser.get(sender_id) == None:
+            enviarMensaje(tech_id, "El usuario no ha realizado ninguna consulta antes de solicitar Soporte Técnico.")  
+        else:
+            enviarMensaje(tech_id, "La última consulta realizada por el usuario ha sido:\n"+salvarMarkdown(dictUltMenUser.get(sender_id)))  
         return 0  
     else:
         return -1
@@ -201,8 +221,7 @@ def mostrarConsultasUltimasCinco(sender_id):
 def mostrarEstadisticas(sender_id):
     conn = psycopg2.connect(dbname=DB_NAME, user= DB_USER, password=DB_PASS, host = DB_HOST)
     cur = conn.cursor()
-    #cur.execute('SELECT * FROM consulta WHERE clsf_usr = "bueno" and hora = current_date;')
-
+    
     cur.execute('SELECT COUNT(*) FROM consulta;')
     cantidadConsultas=cur.fetchall()[0][0]
     cur.execute("SELECT COUNT(*) FROM consulta WHERE clsf_usr='bueno';")
