@@ -244,16 +244,16 @@ def mostrarEstadisticas(sender_id):
 
 def respuestasPredeterminadas(clasificacion):
     if clasificacion=="tecla_rota":
-        return "sos un tecla rota"
+        return "Lamentamos que tengas problemas con las teclas, pero no desesperes, la solución es simplemente cambiar los switches del teclado.\nA continuación, veremos cómo hacerlo:\n\n1) Lo primero que te recomendamos es que, por motivos de comodidad y seguridad, desconectes el teclado.\n\n2) Luego, debes utilizar el extractor de keycaps (la llave plástica roja), para quitar las teclas que quieras reemplazar. Al hacerlo, verás que el switch queda al descubierto.\n\n3) Una vez que tengas los switches correspondientes al descubierto, necesitarás el extractor de switches (la llave metálica). Con el extractor, toma el switch desde su base y jálalo cuidadosamente hasta que logres desencastrarlo y puedas proceder a retirarlo completamente. Ten cuidado de no aplicar demasiada fuerza para no romper ningún componente; la paciencia aquí es fundamental.\n\n4) Para realizar el reemplazo, toma el switch nuevo con el mismo extractor y ubícalo ejerciendo cuidadosamente presión hasta que quede firme en el teclado.\n\n5) Finalmente, vuelve a colocar la tecla (puedes hacerlo con la mano), ¡y listo! ¡A probar esos nuevos switches!"
     elif clasificacion=="consulta_garantia":
-        return "sos un consulta garantia"
+        return "Por lo general, los productos de EVGA tienen un plazo de 1 a 2 años de garantía en caso de defectos propios de fabricación. Y el tiempo exacto debe aparecer en la descripción del producto.\n\n Si querés podés acercarte a alguno de nuestros centros de servicio técnico:\n\nSolis 224 CABA, C.A.B.A.\nBuenos Aires\n011 - 4371-3647 / 4372-8820\nservice@gmzaudioservice.com\n\nJuan Francisco Segui 3637, C.A.B.A.\nBuenos Aires\n11 6448 0587\npeariel@hotmail.com\n\nNo olvides llevar la factura de compra!"
     elif clasificacion=="configuracion_luces":
-        return "sos un configuracion luces"
+        return "Para la configuración de la iluminación debes utilizar el software EVGA Unleash RGB.\nDesde ahí, en el panel de Efectos de iluminación podés elegir modelos pre-configurados o personalizar uno ajustando el brillo, efectos y colores a tu gusto.\n\nAdemás, te comento que desde el panel TOF podes agregar el efecto de iluminación al acercarte o alejarte del teclado."
     elif clasificacion=="devoluciones_cambios":
-        return "sos un devoluciones cambios"
+        return "Si deseas hacer una devolucion comunícate con el Centro de Atención al Cliente(0800-9540). Tenés 10 días desde que se hizo la compra. Podrás hacerlo siempre y cuando el producto no esté usado o esté en el mismo estado en que la recibiste."
     elif clasificacion=="voumen_roto":
-        return "sos un voumen roto"
+        return "Desafortunadamente la rueda del teclado que controla el volumen no se puede reparar por parte del usuario y no es común el remplazo de la pieza por parte del soporte técnico."
     elif clasificacion=="escribe_solo":
-        return "sos un escribe solo"
+        return "No te preocupes, no es un fantasma la razón por la que tu teclado escribe solo.\nAcá te dejo unas posibles causas del problema:\n\n*Acumulación de polvo:* afecta internamente al teclado. Se debe realizar una limpieza profunda del teclado cada cierto tiempo.\n\n*Macros:* grabación de secuencias de macros que se vincule la pulsacón de una tecla y active una secuencia de texto preexistente. Ante la duda mejor eliminarlas.\n\n*Circuitos:* problema que ocasiona fallos de lectura. Desafortunadamente no hay reparación posible pero es muy raro que suceda."
     elif clasificacion=="configuracion_macros":
-        return "sos un configuracion macros"
+        return "Entiendo que pueda ser un poco complicado configurar una Macro, por eso dejame darte una pequeño tutorial para que te vayas familiarizando con el programa.\n\nCrea tu primer Macro:\n\n*1)* Abrir el programa Unleash RGB y dirigete a la pestaña 'Macro editor' ubicado en la esquina inferior derecha del panel principal\n\n*2)* En la parte izquiera de la ventana, haz click en el boton 'add+' y elige un nombre para tu macro.\n\n*3)* En el medio de la ventana, haz click en el comando 'record' y comienza a apretar tu combinación de teclas. No olvides hacer click en 'stop' para guardar la macro.\n\n*4)* Ahora tenés que asignar a una tecla del teclado. Dirígete a la pestaña 'key assignment' y luego apreta tu tecla de Macro dedicada.\n\n*5)* Haz click en el menú desplegable 'primary' y busca donde está guardado las grabación de las macro.\n\n*6)* Selecciona tu macro, apreta 'apply' para guardar la elección y listo! Haz creado exitosamente tu macro."
