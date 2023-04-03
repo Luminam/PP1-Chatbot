@@ -41,6 +41,9 @@ def home():
 
 @app.route('/telegram', methods=['POST', 'GET'])
 def telegram():    
+    data = request.get_json()
+    procesarMensaje(data)   
+    return 'OK', 200
     try:
         data = request.get_json()
         procesarMensaje(data)        
